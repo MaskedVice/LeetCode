@@ -5,19 +5,19 @@ import java.util.Arrays;
 public class App {
     public static void main(String[] args) throws Exception {
         
-        //numberSeries(10);
+        numberSeries(10);
         
-        //System.out.println(sumToN(10));
+        System.out.println(sumToN(10));
         
-        //System.out.println(factorial(10));
+        System.out.println(factorial(10));
         
-        //int[] arr = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13};
-        //System.out.println(Arrays.toString(reverseArray(arr)));
+        int[] arr = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13};
+        System.out.println(Arrays.toString(reverseArray(arr)));
 
-        // String s = "aabbaacgacaabbaa";
-        // System.out.println(checkPalindrome(s)); 0 1 1 2 3 5 8 
+        String s = "aabbaacgacaabbaa";
+        System.out.println(checkPalindrome(s)); 
 
-        // System.out.println(fibonacci(6));
+        System.out.println(fibonacci(6));
 
     }
 
