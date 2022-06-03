@@ -1,5 +1,4 @@
 package BinaryTreeMain;
-
 class Node {
     int value;
     Node left;
