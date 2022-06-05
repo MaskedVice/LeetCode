@@ -1,10 +1,10 @@
 package BinaryTreeMain;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
-
-
 class BinaryTree 
 {
 
@@ -191,16 +191,7 @@ private void travel(Node root)
     }
 
 } 
-class ListItem
-{
-    Node key;
-    int val;
-    public ListItem(Node a, int b)
-    {
-        this.key = a;
-        this.val = b;
-    }
-}
+
 //#endregion
 
 //#region Lowest Common Ancestor
@@ -341,6 +332,132 @@ private int maxPathSum(Node root, int[] sum) {
 
 //#endregion
 
+//#region Vertical Order Traversal
+
+public void verticalOrderTraversal()
+{
+    Node temp = root;
+    int x = 0; int y = 0;
+    Queue<Pairs> res = new LinkedList<Pairs>();
+    ArrayList<Pairs> fArray = new ArrayList<>();
+    vOT(temp,x,y,res,fArray);
+    Collections.sort(fArray,new SortYCoordinate());
+    for (Pairs pairs : fArray) {
+        System.out.println(pairs.key.value + " with coortinates" + pairs.x + " " + pairs.y );
+    }
+}
+
+private void vOT(Node root , int x , int y, Queue<Pairs> res , ArrayList<Pairs> fArray)
+{
+    Pairs start = new Pairs(root, x, y);
+
+    res.add(start);fArray.add(start);
+
+   while(!res.isEmpty())
+   {
+       Pairs pairs = res.poll();
+        if(pairs.key.left != null)
+        {
+            vOT(pairs.key.left, x+1, y-1, res, fArray);
+        }    
+        if(pairs.key.right != null)
+        {
+            vOT(pairs.key.right, x+1, y+1, res, fArray);
+        }
+   }
+}
+
+//#endregion
+
+
+//#region Top View
+
+public void topView()
+{
+    Node temp = root;
+    int x = 0; int y = 0;
+    Queue<Pairs> res = new LinkedList<Pairs>();
+    ArrayList<Pairs> fArray = new ArrayList<>();
+    tV(temp,x,y,res,fArray);
+    Collections.sort(fArray,new SortXCoordinate());
+    for (Pairs pairs : fArray) {
+        System.out.println(pairs.key.value + " with coortinates" + pairs.x + " " + pairs.y );
+    }
+}
+
+private void tV(Node root , int x , int y, Queue<Pairs> res , ArrayList<Pairs> fArray)
+{
+    Pairs start = new Pairs(root, x, y);
+
+    res.add(start);fArray.add(start);
+
+   while(!res.isEmpty())
+   {
+       Pairs pairs = res.poll();
+        if(pairs.key.left != null)
+        {
+            tV(pairs.key.left, x+1, y-1, res, fArray);
+        }    
+        if(pairs.key.right != null)
+        {
+            tV(pairs.key.right, x+1, y+1, res, fArray);
+        }
+   }
+}
+
+//#endregion
+
+
+//#region Helpers
+
+class ListItem
+{
+    Node key;
+    int val;
+    public ListItem(Node a, int b)
+    {
+        this.key = a;
+        this.val = b;
+    }
+}
+
+class Pairs
+{
+    int x;
+    int y;
+    Node key;
+    public Pairs(Node node , int x1 , int y1)
+    {
+        this.key = node;
+        this.x = x1;
+        this.y = y1;
+    }
+}
+class SortYCoordinate implements Comparator<Pairs> {
+ 
+    // Method
+    // Sorting in ascending order of name
+    public int compare(Pairs a, Pairs b)
+    {
+ 
+        return a.y - b.y;
+    }
+    
+}
+
+class SortXCoordinate implements Comparator<Pairs> {
+ 
+    // Method
+    // Sorting in ascending order of name
+    public int compare(Pairs a, Pairs b)
+    {
+ 
+        return a.x - b.x;
+    }
+    
+}
+
+//#endregion
 public static void main(String[] args) 
     {
         
@@ -356,7 +473,7 @@ public static void main(String[] args)
             bt.add(9);
 
         
-        bt.maxSum();
+        bt.verticalOrderTraversal();
         
     }
 }
