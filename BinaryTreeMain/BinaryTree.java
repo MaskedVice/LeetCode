@@ -1,10 +1,13 @@
 package BinaryTreeMain;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.stream.IntStream;
+import java.util.stream.IntStream;
 class BinaryTree 
 {
 
@@ -237,19 +240,18 @@ public int lowestCommonAncestor(int a, int b)
 public void depth()
 {
     Node temp = root;
-    int height = 0;
     
-    System.out.println(checkDepth(temp,height));
+    System.out.println(checkDepth(temp));
 }
 
-private int checkDepth(Node root, int height)
+private int checkDepth(Node root)
 {
     if(root == null)
     {
         return 0;
     }
-    int leftHeight = checkDepth(root.left, height);
-    int rightHeight = checkDepth(root.right, height);
+    int leftHeight = checkDepth(root.left);
+    int rightHeight = checkDepth(root.right);
     return 1 + Math.max(leftHeight, rightHeight);
 }
 
@@ -260,21 +262,21 @@ private int checkDepth(Node root, int height)
 public boolean isBalanced()
 {
     Node temp = root;
-    boolean ans = isBal(temp,0) == -1 ?  false : true;
+    boolean ans = isBal(temp) == -1 ?  false : true;
     return ans;
 }
-private int isBal(Node root,int height)
+private int isBal(Node root)
 {
     if(root == null)
     {
         return 0;
     }
-    int leftHeight = isBal(root.left, height);
+    int leftHeight = isBal(root.left);
     if(leftHeight == -1) return -1;
-    int rightHeight = isBal(root.right, height);
+    int rightHeight = isBal(root.right);
     if(rightHeight == -1) return -1;
 
-    if(Math.abs(leftHeight-rightHeight)>=1)
+    if(Math.abs(leftHeight-rightHeight)>1)
     {
         return -1;
     }
@@ -369,7 +371,6 @@ private void vOT(Node root , int x , int y, Queue<Pairs> res , ArrayList<Pairs> 
 
 //#endregion
 
-
 //#region Top View
 
 public void topView()
@@ -407,8 +408,10 @@ private void tV(Node root , int x , int y, Queue<Pairs> res , ArrayList<Pairs> f
 
 //#endregion
 
+//#endregion
 
 //#region Helpers
+
 
 class ListItem
 {
@@ -472,8 +475,6 @@ public static void main(String[] args)
             bt.add(8);
             bt.add(9);
 
-        
-        bt.verticalOrderTraversal();
         
     }
 }
